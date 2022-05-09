@@ -41,10 +41,10 @@
                         </i> posts <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="posts_dropdown" class="collapse">
                             <li>
-                                <a href="#">view all posts</a>
+                                <a href="posts.php">view all posts</a>
                             </li>
                             <li>
-                                <a href="#">Add post</a>
+                                <a href="posts.php?source=add_posts">Add post</a>
                             </li>
                         </ul>
                     </li>

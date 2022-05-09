@@ -1,6 +1,37 @@
 <?php 
 
+// this function is for any error while inserting posts
+function insertPostError($error){ 
+        global $connection;
+        if(!$error){  
+          die('query failed'.mysqli_error($connection));
+        }
+    
+}
 
+// function to delete posts from table
+function deletePost(){ 
+    if(isset( $_GET['drop'])){ 
+        global $connection;
+        $GET_ID = $_GET['drop'];
+        $query = "DELETE FROM posts WHERE post_id ='$GET_ID'";
+        $delete_post_query = mysqli_query($connection , $query);
+        header("location: posts.php");
+        if(!$delete_post_query){ 
+            die('failed to delete posts'.mysqli_error($connection));
+        }
+        
+    }
+}
+
+// this is a function that updates posts
+// function updatePosts(){
+ 
+     
+       
+    
+    
+// }
 
 // insert categhories into the datbase
 function insert_category(){ 
