@@ -10,6 +10,8 @@
                                 <td>tags</td>
                                 <td>comments</td>
                                 <td>date</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,7 +40,33 @@
                                 <td><?php echo $post_id  ?></td>
                                 <td><?php echo $post_author ?></td>
                                 <td><?php echo $post_title ?></td>
-                                <td><?php echo  $post_category_id ?></td>
+                                <td><?php 
+                                    $query = "SELECT * FROM categories WHERE cat_id = $post_id";
+                                    $sql_query = mysqli_query($connection , $query);
+
+                                    
+                                if(!$sql_query){ 
+                                    die('FAILED TO UPDATE'.mysqli_error($connection));
+                                }
+                                while ($row = mysqli_fetch_assoc($sql_query)) {
+                                    $cat_id = $row['cat_id'];
+                                    $cat_title = $row['cat_title'];
+                                    echo $cat_title;
+                                }
+                                
+                               
+                                ?>
+                                
+                            </td>
+
+                            
+                               
+                                
+                            
+
+                                
+
+                                
                                 <td><?php echo  $post_status ?></td>
                                 <td><img width="100" src="../images/<?php echo   $post_image ?>" alt="images" c"></td>
                                 <td><?php echo  $post_tags ?></td>

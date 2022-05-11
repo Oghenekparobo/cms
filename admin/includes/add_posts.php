@@ -36,8 +36,29 @@ if(isset($_POST['create_post'])) {
 
   <div class="form-group">
     <label>post category id</label>
-    <input type="text" class="form-control" name="post_category_id">
+        <select name="post_category_id" id="post_category_id">
+            <?php
+            
+            
+                $query = "SELECT * FROM categories";
+                $update_cat_query = mysqli_query($connection , $query);
+            
+                if(!$update_cat_query){ 
+                    die('FAILED TO UPDATE CATEGORY ID'.mysqli_error($connection));
+                }
+            
+                while ($row = mysqli_fetch_assoc($update_cat_query)) {
+                    $cat_id = $row['cat_id'];
+                    $cat_title = $row['cat_title'];
+                   
+                    echo "<option value='{$cat_id}'>{$cat_title}</option>";
+                }
+                  
+            ?>
+        
+        </select>
   </div>
+
 
   <div class="form-group">
     <label>post author</label>

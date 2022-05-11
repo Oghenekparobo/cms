@@ -39,21 +39,27 @@ if(isset($_POST['update_post'])){
 
     move_uploaded_file($post_image_tmp_name, "../images/$post_image");
 
-    $query = "UPDATE posts SET ";
-    $query .= " post_category_id = '$post_category_id' ,";
-    $query .= " post_title = '$post_title',";
-    $query .= " post_author = '$post_author',";
-    $query .= " post_date = now(),";
-    $query .= " post_image = '$post_image',";
-    $query .= " post_content = '$post_content',";
-    $query .= " post_tags = '$post_tags',";
-    $query .= " WHERE post_id = '{$GET_ID}'";
+    if(empty($post_image)){ 
+      $query = "SELECT * FROM posts WHERE post_id = '$GET_ID'";
+      $empty_image_query = mysqli_query($connection , $query);
 
-    $edit_post_query = mysqli_query($query , $connection);
-    if(!$edit_post_query){ 
-        die('query don kplaas'.mysqli_error($connection));
+      if(!$empty_image_query){ 
+      die('no image'.mysqli_error($connection));
+      }
+
+      while($row = mysqli_fetch_assoc($empty_image_query)){ 
+        $post_image= $row['post_image'];
+      }
     }
+    
+    $query = "UPDATE posts SET post_category_id = '$post_category_id', post_title = '$post_title', post_author = '$post_author', post_date = now(), post_image = '$post_image', post_content = '$post_content', post_tags = '$post_tags', post_status = '$post_status' WHERE post_id = '$GET_ID' ";
 
+    $edit_query = mysqli_query($connection ,$query);
+
+    if(!$edit_query){ 
+      die('query failed'.mysqli_error($connection));
+    }
+    
 
 }
 
@@ -68,7 +74,7 @@ if(isset($_POST['update_post'])){
 
   <div class="form-group">
     <label>post category id</label>
-        <select name=" post_category_id" id="post_category_id">
+        <select name="post_category_id" id="post_category_id">
             <?php
             
             
@@ -83,7 +89,7 @@ if(isset($_POST['update_post'])){
                     $cat_id = $row['cat_id'];
                     $cat_title = $row['cat_title'];
                    
-                    echo "<option value='{cat_id}'>{$cat_title}</option>";
+                    echo "<option value='{$cat_id}'>{$cat_title}</option>";
                 }
                   
             ?>
@@ -102,7 +108,8 @@ if(isset($_POST['update_post'])){
   </div>
 
   <div class="form-group">
-  <img src="../images/<?php echo $post_image ?>" width="100" alt="image">
+  <img src="../images/<?php echo $post_image ?>"  width="100" alt="image">
+  <input type="file" name="post_image" >
   </div>
 
   <div class="form-group">
