@@ -18,7 +18,7 @@
         <div class="col-md-8">
            
          <?php
-
+ $get_id = $_GET['category'];
          if(isset($_GET['category'])){ 
             $get_id = $_GET['category'];
          }

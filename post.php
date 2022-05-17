@@ -21,11 +21,11 @@
 
     if(isset($_GET['p_id'])){ 
         $p_id = $_GET['p_id'];
-        $query = "SELECT * FROM posts WHERE post_id = '$p_id'";
+        
     }
       
 
-    $query = "SELECT * FROM posts WHERE post_id = '$p_id'";
+    $query = "SELECT * FROM posts WHERE post_id = $p_id";
     $select_all_posts_query = mysqli_query($connection,$query);
 
     while($row = mysqli_fetch_assoc($select_all_posts_query)) {
@@ -75,6 +75,11 @@
       <div class="well">
                     <h4>Leave a Comment:</h4>
                     <form role="form">
+                        
+                    <div class="form-group">
+                          <input type="text">
+                        </div>
+
                         <div class="form-group">
                             <textarea class="form-control" rows="3"></textarea>
                         </div>
