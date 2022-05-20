@@ -41,12 +41,29 @@
                                 <td><?php echo $com_author ?></td>
                                 <td><?php echo $com_email?></td>                          
                                 <td><?php echo $com_content?></td>
-                                <td><?php  echo 'response'; ?></td>
+                                <td><?php  
+
+                                 $query = "SELECT * FROM posts WHERE post_id = '$com_post_id '";
+                                 $response_query = mysqli_query($connection , $query);
+
+                                 while($row = mysqli_fetch_assoc($response_query)){ 
+                                 $post_id = $row['post_id'];
+                                 echo  $post_title = $row['post_title'];
+
+                                        }
+                                
+                                
+                                
+                                
+                                
+                                ?>
+                                </td>
                                 <td><?php echo $comment_status ?></td>
                                 <td><?php echo $comment_date?></td>
-                                <td><a href="comments.php?drop=<?php echo $com_id ?>">Approve</a></td>
-                                <td><a href="comments.php?source=edit_comments&c_id=<?php echo $com_id ?>">unApprove</a></td>
-                                <td><a href="comments.php?drop=<?php echo $com_id ?>">trash</a></td>
+                                <td><a href="comments.php?approve=<?php echo $com_id ?>">Approve</a></td>
+                                <td><a href="comments.php?unapprove=<?php echo $com_id ?>">unApprove</a></td>
+                                <td><a href="comments.php?trash=<?php echo $com_id ?>">trash</a></td>
+                                
   
 
                             </tr>
@@ -54,5 +71,8 @@
                             
                         </tbody>
                     </table>
-                    <?php deletePost() ?>
+                    <?php deleteComments(); ?>
+                    <?php unApprove(); ?>
+                    <?php approve(); ?>
+                    
                     

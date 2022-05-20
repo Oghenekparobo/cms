@@ -10,8 +10,8 @@
                                 <td>tags</td>
                                 <td>comments</td>
                                 <td>date</td>
-                                <td></td>
-                                <td></td>
+                                <td>delete</td>
+                                <td>edit</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,7 +41,7 @@
                                 <td><?php echo $post_author ?></td>
                                 <td><?php echo $post_title ?></td>
                                 <td><?php 
-                                    $query = "SELECT * FROM categories WHERE cat_id = $post_id";
+                                    $query = "SELECT * FROM categories WHERE cat_id = $post_category_id";
                                     $sql_query = mysqli_query($connection , $query);
 
                                     

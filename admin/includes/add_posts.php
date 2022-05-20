@@ -10,14 +10,13 @@ if(isset($_POST['create_post'])) {
     $post_image_tmp_name= $_FILES['post_image']['tmp_name'];
     $post_content = $_POST['post_content'];
     $post_tags= $_POST['post_tags'];
-    $post_comment_count = 4;
     $post_status = $_POST['post_status'];
 
     // function to put images in a temporary folder
     move_uploaded_file($post_image_tmp_name, "../images/$post_image");
 
-    $query = "INSERT INTO posts( post_category_id , post_title , post_author , post_date , post_image , post_content , post_tags , post_comment_count , post_status)";
-    $query .= "VALUES( '$post_category_id ', '$post_title' ,  '$post_author' , now(), '$post_image' , '$post_content' , '$post_tags' , '$post_comment_count' ,'$post_status')";
+    $query = "INSERT INTO posts( post_category_id , post_title , post_author , post_date , post_image , post_content , post_tags ,  post_status)";
+    $query .= "VALUES( '$post_category_id ', '$post_title' ,  '$post_author' , now(), '$post_image' , '$post_content' , '$post_tags' ,'$post_status')";
     $add_post_query = mysqli_query($connection, $query);
 
     insertPostError($add_post_query);
@@ -55,7 +54,7 @@ if(isset($_POST['create_post'])) {
                 }
                   
             ?>
-        
+    
         </select>
   </div>
 

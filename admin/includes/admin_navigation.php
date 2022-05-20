@@ -57,10 +57,10 @@
                             <i class="fa fa-fw fa-arrows-v"></i> users<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="users.php">View all Users</a>
                             </li>
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="users.php?source=add_users">Add users</a>
                             </li>
                         </ul>
                     </li>

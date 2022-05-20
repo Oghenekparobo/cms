@@ -23,17 +23,19 @@
         $query = "SELECT * FROM posts";
         $select_all_posts_query = mysqli_query($connection,$query);
 
-        while($row = mysqli_fetch_assoc($select_all_posts_query)) {
+        while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
+            $post_id = $row['post_id'];
+            $post_title = $row['post_title'];
+            $post_author = $row['post_author'];
+            $post_date = $row['post_date'];
+            $post_image = $row['post_image'];
+            $post_content = substr($row['post_content'], 0, 5) ;
+            $post_status = $row['post_status'];
 
-        $post_id = $row['post_id'];
-        $post_title = $row['post_title'];
-        $post_author = $row['post_author'];
-        $post_date = $row['post_date'];
-        $post_image = $row['post_image'];
-        $post_content = substr($row['post_content'] , 0 , 5) ;        
-
-    
-        ?>
+            if ($post_status !== 'published') {
+                echo 'oops no vex, we know see wetin you dey find';
+            } else {
+                ?>
         
      
 
@@ -52,7 +54,7 @@
                 
                 
                 <a href="">
-                <img class="img-responsive" src="images/<?php echo $post_image;?>" alt="">
+                <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="">
                 </a>
                 
                 
@@ -64,7 +66,9 @@
                 <hr>
                 
 
-   <?php } ?>
+   <?php
+            } 
+        } ?>
 
                 
                 
