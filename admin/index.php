@@ -1,26 +1,27 @@
-<?php include 'includes/admin_header.php' ;
+<?php include 'includes/admin_header.php';
 
 
 
 ?>
 
-    <div id="wrapper">
+<div id="wrapper">
 
-        <!-- Navigation -->
-     <?php include './includes/admin_navigation.php' ?>
+    <!-- Navigation -->
+    <?php include './includes/admin_navigation.php' ?>
 
-        <div id="page-wrapper">
+    <div id="page-wrapper">
 
-            <div class="container-fluid">
+        <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                           Welcome to Admin
-                            <small>Author</small>
-                        </h1>
-                        <!-- <ol class="breadcrumb">
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Welcome to Admin
+                    
+                    </h1>
+                    <h4><?php echo  $_SESSION['username'] ?></h4>
+                    <!-- <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
                             </li>
@@ -28,14 +29,14 @@
                                 <i class="fa fa-file"></i> Blank Page
                             </li>
                         </ol> -->
-                    </div>
                 </div>
-                <!-- /.row -->
-
             </div>
-            <!-- /.container-fluid -->
+            <!-- /.row -->
 
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
 
     <?php include './includes/admin_footer.php' ?>
