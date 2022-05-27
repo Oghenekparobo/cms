@@ -32,9 +32,8 @@
             $post_content = substr($row['post_content'], 0, 5) ;
             $post_status = $row['post_status'];
 
-            if ($post_status !== 'published') {
-                echo 'oops no vex, we know see wetin you dey find';
-            } else {
+            if ($post_status == 'published') {
+        
                 ?>
         
      

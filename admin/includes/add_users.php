@@ -23,7 +23,11 @@ if(isset($_POST['add_user'])) {
 
     if(!$add_users_query){
         die('error adding users'.mysqli_error($connection));
+    }else{
+      echo "User Created:" .".". "<a href='users.php'>View users</a>";
     }
+
+    
 
     
 

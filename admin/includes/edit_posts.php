@@ -103,9 +103,15 @@ if(isset($_POST['update_post'])){
   </div>
 
   <div class="form-group">
+    <select name="post_status" id="post_status">
+      <option value=""><?php echo $post_status ?></option>
+    </select>
+  </div>
+
+  <!-- <div class="form-group">
     <label>post status</label>
     <input value="<?php echo $post_status ?>" type="text" class="form-control" name="post_status">
-  </div>
+  </div> -->
 
   <div class="form-group">
   <img src="../images/<?php echo $post_image ?>"  width="100" alt="image">
