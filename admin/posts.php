@@ -1,63 +1,61 @@
 <?php include 'includes/admin_header.php' ?>
 
 
-    <div id="wrapper">
+<div id="wrapper">
 
-        <!-- Navigation -->
-     <?php include 'includes/admin_navigation.php' ?>
+    <!-- Navigation -->
+    <?php include 'includes/admin_navigation.php' ?>
 
-        <div id="page-wrapper">
+    <div id="page-wrapper">
 
-            <div class="container-fluid">
+        <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
 
                     <h1 class="page-header">
-                           Posts
-                            <small><?php echo  $_SESSION['username'] ?></small>
+                        Posts
+                        <small><?php echo  $_SESSION['username'] ?></small>
                     </h1>
 
-                   <?php 
-                   
-                   
-                   if(isset($_GET['source'])){
-                    $source = $_GET['source'];
-                       
-                   }else{ 
-                    $source = '';
-                    
-                   }
+                    <?php
 
-    
 
-               
+                    if (isset($_GET['source'])) {
+                        $source = $_GET['source'];
+                    } else {
+                        $source = '';
+                    }
 
-                   switch($source){ 
-                    case 'add_posts':
-                        include './includes/add_posts.php'; 
-                        break;
 
-                    case 'edit_posts':
-                         include './includes/edit_posts.php'; 
-                         break;    
-                    
-    
-                    default:
-                        include './includes/view_all_posts.php';
-                        break;
-  
-                   } 
-                   
-                   
-                   
-                   
-                   
-                   ?>
-                  
 
-                    </div><!--- end ->
+
+
+                    switch ($source) {
+                        case 'add_posts':
+                            include './includes/add_posts.php';
+                            break;
+
+                        case 'edit_posts':
+                            include './includes/edit_posts.php';
+                            break;
+
+
+                        default:
+                            include './includes/view_all_posts.php';
+                            break;
+                    }
+
+
+
+
+
+                    ?>
+
+
+                </div>
+                <!--- end ->
                 </div>
                 <!-- /.row -->
 
@@ -67,4 +65,4 @@
         </div>
         <!-- /#page-wrapper -->
 
-    <?php include 'includes/admin_footer.php'; ?>
+        <?php include 'includes/admin_footer.php'; ?>
