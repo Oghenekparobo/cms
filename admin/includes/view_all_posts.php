@@ -6,19 +6,19 @@ if (isset($_POST['checkboxarray'])) {
 
         switch ($bulkoptions) {
             case 'published':
-                
+
                 $sql = "UPDATE posts SET post_status =' $bulkoptions' WHERE post_id ='$checkboxvalue'  ";
-                $query = mysqli_query($connection , $sql);
+                $query = mysqli_query($connection, $sql);
                 break;
 
             case 'draft':
                 $sql = "UPDATE posts SET post_status =' $bulkoptions' WHERE post_id ='$checkboxvalue'  ";
-                $query = mysqli_query($connection , $sql);
+                $query = mysqli_query($connection, $sql);
                 break;
 
             case 'delete':
                 $sql = "DELETE FROM posts  WHERE post_id ='$checkboxvalue'  ";
-                $query = mysqli_query($connection , $sql);
+                $query = mysqli_query($connection, $sql);
                 break;
 
             default:
@@ -43,7 +43,7 @@ if (isset($_POST['checkboxarray'])) {
 
         <div class="col-xs-4 pb-4">
             <input type="submit" class="btn btn-success " name="submit" value="apply">
-            <a href="add_posts.php" class="btn btn-primary">Add new posts</a>
+            <a href="posts.php?source=add_posts" class="btn btn-primary">Add new post</a>
         </div>
 
         <thead>
@@ -59,6 +59,7 @@ if (isset($_POST['checkboxarray'])) {
                 <td>comments</td>
                 <td>date</td>
                 <td>delete</td>
+                <td>view post</td>
                 <td>edit</td>
             </tr>
         </thead>
@@ -114,6 +115,7 @@ if (isset($_POST['checkboxarray'])) {
                     <td><?php echo  $post_comment_count ?></td>
                     <td><?php echo  $post_date ?></td>
                     <td><a href="posts.php?drop=<?php echo $post_id ?>">drop</a></td>
+                    <td><a href="../post.php?&p_id=<?php echo $post_id ?>">view post</a></td>
                     <td><a href="posts.php?source=edit_posts&p_id=<?php echo $post_id ?>">update</a></td>
 
                 </tr>

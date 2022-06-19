@@ -20,6 +20,11 @@ if(isset($_POST['create_post'])) {
     $add_post_query = mysqli_query($connection, $query);
 
     insertPostError($add_post_query);
+
+    // gets the last id created in the post table
+    $GET_ID = mysqli_insert_id($connection);
+
+    echo "<p>post created <a href='../post.php?p_id= $GET_ID'>view your new post</a></li>";
 }
 ?>
 
@@ -66,7 +71,11 @@ if(isset($_POST['create_post'])) {
 
   <div class="form-group">
     <label>post status</label>
-    <input type="text" class="form-control" name="post_status">
+   <select class="form-control" name="post_status">
+   <option value="">post status</option>
+   <option value="published">published</option>
+     <option value="draft">draft</option>
+   </select>
   </div>
 
   <div class="form-group">

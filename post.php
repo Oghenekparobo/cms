@@ -76,27 +76,26 @@
              <?php 
              if(isset($_POST['submit_content'])){ 
 
+             
                 $p_id = $_GET['p_id'];
                 $com_email =  $_POST['comment_email'];
                 $com_author =  $_POST['comment_author'];
                 $com_content =  $_POST['comment_content'];
                 
-                
-
+                if(!empty( $com_email)  && !empty( $com_author) && !empty($com_content)){
+                    
                 $query = "INSERT INTO comments (comment_post_id , comment_author , comment_email , comment_content , comment_status , comment_date)";
                 $query .= " VALUES('$p_id' , '$com_author' , '$com_email' , '$com_content' , 'unapproved' , now() )";
 
                 $com_query = mysqli_query($connection , $query);
 
+                
                 if(!$com_query){ 
                     die('sorry failed inserting comments'.mysqli_error($connection));
                 }
 
-             }
-             
-            // working on the comment count
-            
-               
+
+                 // working on the comment count              
             $query = "UPDATE posts SET  post_comment_count = post_comment_count + 1 WHERE post_id = $p_id";
            
             $post_comment_count_query = mysqli_query($connection , $query);
@@ -107,6 +106,19 @@
              
              
              
+
+
+                }
+
+
+             }else{ 
+                 echo "<script>alert('soro soke sir') <script>";
+
+             }
+             
+            
+            
+
              
              ?>
                     <h4>Leave a Comment:</h4>
