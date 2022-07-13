@@ -29,6 +29,9 @@ if (isset($_POST['login'])) {
     $db_password = $row['user_password'];
   }
 
+  $password  = crypt($password ,  $db_password);
+  
+
   if($username === $db_username  && $password === $db_password){ 
     $_SESSION['user_id']=$db_id;
     $_SESSION['username']=$db_username;

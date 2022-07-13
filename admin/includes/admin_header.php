@@ -1,18 +1,15 @@
-
-
 <?php include '../includes/db.php'; ?>
 <?php include 'functions.php'; ?>
 
 <?php ob_start(); ?>
 <?php session_start(); ?>
-<?php 
+<?php
 
-if(!isset( $_SESSION['user_role']) ){
-       header('location: ../index.php');  
+if (isset($_SESSION['user_role'])) {
+    if ($_SESSION['user_role'] !== 'admin') {
+        header('Location: ../index.php');
+    }
 }
-
-
-
 
 ?>
 
@@ -47,7 +44,7 @@ if(!isset( $_SESSION['user_role']) ){
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- custom wysiwyg
  <!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
 </head>
 
