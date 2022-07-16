@@ -1,6 +1,6 @@
 
 <?php 
-;
+
 if(isset($_POST['create_post'])) {
     $post_category_id = $_POST['post_category_id'];
     $post_title = $_POST['post_title'];
