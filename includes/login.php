@@ -8,15 +8,12 @@ if (isset($_POST['login'])) {
   $password = $_POST['password'];
 
 
-  // password crypting
+  // password encrypting
   $query = " SELECT Randsalt from users";
   $randsalt_query = mysqli_query($connection, $query);
-
-  
   if (!$randsalt_query) {
     die('query failed' . mysqli_error($connection));
   }
-
   
   $row = mysqli_fetch_array($randsalt_query);
   $salt = $row['Randsalt'];

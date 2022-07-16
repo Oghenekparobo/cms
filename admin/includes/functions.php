@@ -192,7 +192,7 @@ function displayUsers(){
                                 <td> <a href="users.php?admin=<?php echo $user_id ?> ">user is an admin</a></td>
                                 <td> <a href="users.php?subscriber=<?php echo $user_id ?> ">user is a subscriber</a></td>
                                 <td> <a href="users.php?source=edit_users&edit_id= <?php echo $user_id ?> ">edit</a></td>
-                                <td> <a href="users.php?delete=<?php echo $user_id ?> ">Delete</a></td>
+                                <td> <a onclick="prompt('are you sure you want to delete)" href="users.php?delete=<?php echo $user_id ?> ">Delete</a></td>
                                 <td><?php echo  $user_date ?></td>
                             </tr>    
   <?php  }
