@@ -1,13 +1,14 @@
 <?php
 if (isset($_POST['checkboxarray'])) {
+    $boxes = $_POST['checkboxarray'];
 
-    foreach ($_POST['checkboxarray'] as $checkboxvalue) {
+    foreach ($boxes as $checkboxvalue) {
         $bulkoptions = $_POST['bulkoptions'];
 
         switch ($bulkoptions) {
             case 'published':
 
-                $sql = "UPDATE posts SET post_status =' $bulkoptions' WHERE post_id ='$checkboxvalue'  ";
+                $sql = "UPDATE posts SET post_status ='$bulkoptions' WHERE post_id ='$checkboxvalue'  ";
                 $query = mysqli_query($connection, $sql);
                 break;
 
@@ -19,6 +20,30 @@ if (isset($_POST['checkboxarray'])) {
             case 'delete':
                 $sql = "DELETE FROM posts  WHERE post_id ='$checkboxvalue'  ";
                 $query = mysqli_query($connection, $sql);
+                break;
+
+            case 'clone':
+
+                $query = "SELECT * FROM posts WHERE post_id = $checkboxvalue";
+                $select_all_posts_query = mysqli_query($connection, $query);
+
+                while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
+                    $post_id = $row['post_id'];
+                    $post_category_id = $row['post_category_id'];
+                    $post_title = $row['post_title'];
+                    $post_author = $row['post_author'];
+                    $post_date = $row['post_date'];
+                    $post_image = $row['post_image'];
+                    $post_content = $row['post_content'];
+                    $post_tags = $row['post_tags'];
+
+                    $post_status = $row['post_status'];
+                }
+
+
+                $query = "INSERT INTO posts( post_category_id , post_title , post_author , post_date , post_image , post_content , post_tags ,  post_status) VALUES( '$post_category_id ', '$post_title' ,  '$post_author' , now(), '$post_image' , '$post_content' , '$post_tags' ,'$post_status')";
+                $add_post_query = mysqli_query($connection, $query);
+                insertPostError($add_post_query);
                 break;
 
             default:
@@ -38,6 +63,7 @@ if (isset($_POST['checkboxarray'])) {
                 <option value="published">publish</option>
                 <option value="draft">draft</option>
                 <option value="delete">delete</option>
+                <option value="clone">clone</option>
             </select>
         </div>
 
@@ -66,7 +92,7 @@ if (isset($_POST['checkboxarray'])) {
         <tbody>
             <?php
 
-            $query = "SELECT * FROM posts";
+            $query = "SELECT * FROM posts ORDER BY  post_id DESC";
             $post_query = mysqli_query($connection, $query);
             if (!$post_query) {
                 die('query failed' . mysqli_error($connection));
