@@ -24,14 +24,20 @@ function deletePost(){
     }
 }
 
-// this is a function that updates posts
-// function updatePosts(){
- 
-     
-       
-    
-    
-// }
+// this is a function that resets views count
+function resetViews(){ 
+    if(isset( $_GET['reset'])){ 
+        global $connection;
+        $GET_ID = $_GET['reset'];
+        $query = "UPDATE posts SET post_views =post_views * 0 WHERE post_id =$GET_ID";
+        $reset_post_query = mysqli_query($connection , $query);
+        header("location: posts.php");
+        if(!$reset_post_query){ 
+            die('failed to reset posts'.mysqli_error($connection));
+        }
+        
+    }
+}
 
 // insert categhories into the datbase
 function insert_category(){ 

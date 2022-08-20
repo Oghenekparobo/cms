@@ -84,6 +84,7 @@ if (isset($_POST['checkboxarray'])) {
                 <td>tags</td>
                 <td>comments</td>
                 <td>date</td>
+                <td>views</td>
                 <td>delete</td>
                 <td>view post</td>
                 <td>edit</td>
@@ -110,6 +111,7 @@ if (isset($_POST['checkboxarray'])) {
                 $post_tags = $row['post_tags'];
                 $post_comment_count = $row['post_comment_count'];
                 $post_status = $row['post_status'];
+                $post_views = $row['post_views'];
             ?>
                 <tr>
                     <td><input type="checkbox" id="checkboxes" name="checkboxarray[]" value="<?php echo $post_id ?> "></td>
@@ -140,6 +142,7 @@ if (isset($_POST['checkboxarray'])) {
                     <td><?php echo  $post_tags ?></td>
                     <td><?php echo  $post_comment_count ?></td>
                     <td><?php echo  $post_date ?></td>
+                    <td><a href="posts.php?reset=<?php echo $post_id ?>"><?php echo  $post_views ?></a></td>
                     <td><a href="posts.php?drop=<?php echo $post_id ?>">drop</a></td>
                     <td><a href="../post.php?&p_id=<?php echo $post_id ?>">view post</a></td>
                     <td><a href="posts.php?source=edit_posts&p_id=<?php echo $post_id ?>">update</a></td>
@@ -150,4 +153,7 @@ if (isset($_POST['checkboxarray'])) {
         </tbody>
     </table>
 </form>
-<?php deletePost() ?>
+<?php
+ deletePost();
+ resetViews();
+?>
