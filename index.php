@@ -17,9 +17,29 @@
         <div class="col-md-8">
 
             <?php
+            $per_page = 5;
+            if (isset($_GET['page'])) {
+                $page = $_GET['page'];
+            } else {
+                $page = "";
+            }
+
+            if ($page == "" || $page == 1) {
+                $page_1 = 0;
+            } else {
+                $page_1 = ($page * $per_page) - $per_page;
+            }
 
 
-            $query = "SELECT * FROM posts";
+
+            $query = "SELECT * FROM posts ";
+            $find_count = mysqli_query($connection, $query);
+            $count = mysqli_num_rows($find_count);
+            $count = ceil($count / $per_page);
+
+
+
+            $query = "SELECT * FROM posts LIMIT $page_1 , $per_page";
             $select_all_posts_query = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
@@ -34,19 +54,13 @@
                 if ($post_status == 'published') {
 
             ?>
-
-
-
                     <!-- First Blog Post -->
-
-
-
                     <h2>
                         <a href="post.php?p_id=<?php echo $post_id ?>"><?php echo $post_title ?></a>
                     </h2>
                     <p class="lead">
-                    by <a href="author_posts.php?author=<?php echo $post_author ?>&p_id=<?php echo $post_id; ?>"><?php echo $post_author ?></a>
-                </p>
+                        by <a href="author_posts.php?author=<?php echo $post_author ?>&p_id=<?php echo $post_id; ?>"><?php echo $post_author ?></a>
+                    </p>
                     <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date ?></p>
                     <hr>
 
@@ -81,6 +95,22 @@
 
     </div>
     <!-- /.row -->
+    <hr>
+
+    <ul class="pager">
+        <?php
+        for ($i = 1; $i <= $count; $i++) {
+        ?>
+            <li><a href="index.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+        <?php
+
+        }
+
+
+
+        ?>
+
+    </ul>
 
 
 
