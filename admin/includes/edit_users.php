@@ -45,23 +45,36 @@ if (isset($_POST['edit_user'])) {
   // $user_image = $_FILES['user_image']['name'];
   // $user_image_tmp = $_FILES['user_image']['tmp_name'];
 
-  $query = " SELECT Randsalt from users";
-  $randsalt_query = mysqli_query($connection, $query);
-  if (!$randsalt_query) {
-    die('query failed' . mysqli_error($connection));
+  // $query = " SELECT Randsalt from users";
+  // $randsalt_query = mysqli_query($connection, $query);
+  // if (!$randsalt_query) {
+  //   die('query failed' . mysqli_error($connection));
+  // }
+
+  // $row = mysqli_fetch_array($randsalt_query);
+  // $salt = $row['Randsalt'];
+  // $hash_password = crypt($password, $salt);
+
+  if (!empty($password)) {
+
+    $query_password = "SELECT * FROM users WHERE user_id = $edit_id";
+    $get_user = mysqli_query($connection, $query_password);
+
+    $row = mysqli_fetch_array($get_user);
+    $db_user_password = $row['user_password'];
   }
 
-  $row = mysqli_fetch_array($randsalt_query);
-  $salt = $row['Randsalt'];
-  $hash_password = crypt($password, $salt);
-
-
-  $query = "UPDATE users SET username = '$username',user_password = '$hash_password',user_firstname =' $firstname ',user_lastname = '$lastname',user_email = '$email' ,user_role = '$role' WHERE user_id = $edit_id";
-  $edit_users_query = mysqli_query($connection, $query);
-
-  if (!$edit_users_query) {
-    die('error' . mysqli_error($connection));
+  if ($password !== $db_user_password) {
+    $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 5)); //new system encrypting system
+  
+    $query = "UPDATE users SET username = '$username',user_password = ' $password',user_firstname =' $firstname ',user_lastname = '$lastname',user_email = '$email' ,user_role = '$role' WHERE user_id = $edit_id";
+    $edit_users_query = mysqli_query($connection, $query);
+  
+    if (!$edit_users_query) {
+      die('error' . mysqli_error($connection));
+    }
   }
+
 }
 ?>
 

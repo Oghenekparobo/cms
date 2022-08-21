@@ -8,22 +8,22 @@ if (isset($_POST['login'])) {
   $password = $_POST['password'];
 
 
-  // password encrypting
-  $query = " SELECT Randsalt from users";
-  $randsalt_query = mysqli_query($connection, $query);
-  if (!$randsalt_query) {
-    die('query failed' . mysqli_error($connection));
-  }
-  
-  $row = mysqli_fetch_array($randsalt_query);
-  $salt = $row['Randsalt'];
-  $password = crypt($password, $salt);
+  // // password encrypting
+  // $query = " SELECT Randsalt from users";
+  // $randsalt_query = mysqli_query($connection, $query);
+  // if (!$randsalt_query) {
+  //   die('query failed' . mysqli_error($connection));
+  // }
+
+  // $row = mysqli_fetch_array($randsalt_query);
+  // $salt = $row['Randsalt'];
+  // $password = crypt($password, $salt);
 
 
   $username = mysqli_real_escape_string($connection, $username);
   $password = mysqli_real_escape_string($connection, $password);
 
-  $query = "SELECT * FROM users WHERE username = '$username' AND user_password = '$password'";
+  $query = "SELECT * FROM users WHERE username = '$username'";
 
   $login_query = mysqli_query($connection, $query);
 
@@ -46,7 +46,7 @@ if (isset($_POST['login'])) {
 
 
 
-  if ($username === $db_username  && $password === $db_password) {
+  if (password_verify($password,  $db_password)) {
     $_SESSION['user_id'] = $db_id;
     $_SESSION['username'] = $db_username;
     $_SESSION['user_firstname'] = $db_user_firstname;

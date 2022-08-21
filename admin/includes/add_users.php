@@ -13,7 +13,8 @@ if (isset($_POST['add_user'])) {
 
   // function to put images in a temporary folder
   // move_uploaded_file($post_image_tmp_name, "../images/$user_image");
-
+  $user_password= password_hash($user_password , PASSWORD_BCRYPT , array('cost' => 5 )); //new system encrypting system
+    
   $query = "INSERT INTO users( username , user_password , user_firstname , user_lastname , user_email , user_role , user_date)";
   $query .= "VALUES('$username' , '$user_password' , '$user_firstname' , '$user_lastname' , '$user_email' , '$user_role' , now())";
 
