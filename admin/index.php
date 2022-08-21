@@ -1,8 +1,4 @@
-<?php include 'includes/admin_header.php';
-
-
-
-?>
+<?php include 'includes/admin_header.php';?>
 
 <div id="wrapper">
 
@@ -19,6 +15,14 @@
                     <h1 class="page-header">
                         Welcome to Admin
                         <small><?php echo  $_SESSION['username'] ?></small>
+                    </h1>
+
+                    <h1>
+
+                      
+
+
+
                     </h1>
 
                     <!-- <ol class="breadcrumb">
@@ -153,36 +157,36 @@
 
             </div>
             <?php
-            
+
             $query = "SELECT * FROM posts WHERE post_status = 'published'";
             $select_publish_posts = mysqli_query($connection, $query);
             $publish_count = mysqli_num_rows($select_publish_posts);
-            
-            
-            
+
+
+
             $query = "SELECT * FROM posts WHERE post_status = 'draft'";
             $select_draft_posts = mysqli_query($connection, $query);
-            $draft_count = mysqli_num_rows( $select_draft_posts);
-            
+            $draft_count = mysqli_num_rows($select_draft_posts);
 
-            
+
+
             $query = "SELECT * FROM comments WHERE comment_status = 'unapproved'";
             $select_unapprove_comments = mysqli_query($connection, $query);
-            $unapprove_count = mysqli_num_rows( $select_unapprove_comments);
+            $unapprove_count = mysqli_num_rows($select_unapprove_comments);
 
             $query = "SELECT * FROM users WHERE user_role = 'admin'";
             $select_admin_users = mysqli_query($connection, $query);
-            $admin_count = mysqli_num_rows( $select_admin_users );
+            $admin_count = mysqli_num_rows($select_admin_users);
 
             $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
             $select_subscriber_users = mysqli_query($connection, $query);
-            $subscriber_count = mysqli_num_rows( $select_subscriber_users );
-            
-            
-            
-            
-            
-            
+            $subscriber_count = mysqli_num_rows($select_subscriber_users);
+
+
+
+
+
+
             ?>
 
             <div class="row">
@@ -195,13 +199,13 @@
 
                         function drawChart() {
                             var data = google.visualization.arrayToDataTable([
-                                ['data', 'count'], 
+                                ['data', 'count'],
                                 <?php
-                                $element_text = [ 'published','active posts', 'drafts' ,  'unapprove_comments' , 'admins','subscribers','comments', 'users', 'categories'];
-                                $element_count = [ $publish_count , $post_counts, $draft_count , $unapprove_count ,$admin_count, $subscriber_count , $comment_count, $users_count , $categories_count];
+                                $element_text = ['published', 'active posts', 'drafts',  'unapprove_comments', 'admins', 'subscribers', 'comments', 'users', 'categories'];
+                                $element_count = [$publish_count, $post_counts, $draft_count, $unapprove_count, $admin_count, $subscriber_count, $comment_count, $users_count, $categories_count];
 
-                                for ($i =0; $i < 9; $i++) {
-                                    echo "['{$element_text[$i]}'". "," ."{$element_count[$i]}] ,";
+                                for ($i = 0; $i < 9; $i++) {
+                                    echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}] ,";
                                 }
 
                                 ?>
