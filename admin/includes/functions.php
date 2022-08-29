@@ -1,4 +1,10 @@
-<?php 
+<?php
+// security function to esape and prevent sql injection
+function escape($string){
+    global $connection;
+   return mysqli_real_escape_string($connection , trim($string));
+
+}
 
 // this function is for any error while inserting posts
 function insertPostError($error){ 
