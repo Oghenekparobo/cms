@@ -5,6 +5,7 @@ if(isset($_POST['create_post'])) {
     $post_category_id = $_POST['post_category_id'];
     $post_title = $_POST['post_title'];
     $post_author = $_POST['post_author'];
+   $post_user = $_POST['post_user'];
     $post_date = date('d-m-y');
     $post_image = $_FILES['post_image']['name'];
     $post_image_tmp_name= $_FILES['post_image']['tmp_name'];
@@ -15,8 +16,8 @@ if(isset($_POST['create_post'])) {
     // function to put images in a temporary folder
     move_uploaded_file($post_image_tmp_name, "../images/$post_image");
 
-    $query = "INSERT INTO posts( post_category_id , post_title , post_author , post_date , post_image , post_content , post_tags ,  post_status)";
-    $query .= "VALUES( '$post_category_id ', '$post_title' ,  '$post_author' , now(), '$post_image' , '$post_content' , '$post_tags' ,'$post_status')";
+    $query = "INSERT INTO posts( post_category_id , post_title , post_author , post_user ,  post_date , post_image , post_content , post_tags ,  post_status)";
+    $query .= "VALUES( '$post_category_id ', '$post_title' ,  '$post_author'  ,  '$post_user' , now(), '$post_image' , '$post_content' , '$post_tags' ,'$post_status')";
     $add_post_query = mysqli_query($connection, $query);
 
     insertPostError($add_post_query);
@@ -39,7 +40,7 @@ if(isset($_POST['create_post'])) {
   </div>
 
   <div class="form-group">
-    <label>post category id</label>
+    <label> category</label>
         <select name="post_category_id" id="post_category_id">
             <?php
             
@@ -63,10 +64,37 @@ if(isset($_POST['create_post'])) {
         </select>
   </div>
 
+  
+  <div class="form-group">
+    <label for="users">Users</label>
+    <select name="post_user" id="users">
+      <?php
+
+
+      $query = "SELECT * FROM users";
+      $users_query = mysqli_query($connection, $query);
+
+      if (!$users_query) {
+        die('failed' . mysqli_error($connection));
+      }
+
+      while ($row = mysqli_fetch_assoc($users_query)) {
+        $user_id = $row['user_id'];
+        $username = $row['username'];
+
+        echo "<option value='$username'>{$username}</option>";
+      }
+
+      ?>
+
+    </select>
+  </div>
+
+
 
   <div class="form-group">
     <label>post author</label>
-    <input type="text" class="form-control" name="post_author">
+    <input type="text" cla/ss="form-control" name="post_author">
   </div>
 
   <div class="form-group">
