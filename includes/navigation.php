@@ -1,6 +1,7 @@
 <?php include 'db.php' ?>
 <?php ob_start(); ?>
 <?php session_start(); ?>
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -45,6 +46,9 @@
                 <li><a href="admin">Admin</a></li>
                 <li class="<?php echo  $registration_class ?>"><a href="registration.php">registration</a></li>
                 <li><a href="contact.php">contact</a></li>
+                <li>
+                    <a href="./includes/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                </li>
                 <?php
 
                 if (isset($_SESSION['user_role'])) {

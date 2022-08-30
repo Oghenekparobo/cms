@@ -22,6 +22,16 @@
 <!-- login -->
 
 <div class="well">
+   <?php
+   
+   if(isset($_SESSION['user_role'])){
+       ?>
+       <h1>logged in as <?php echo $_SESSION['username']; ?></h1>
+       <?php
+    
+   }
+   else{ 
+       ?>
     <h4>Login</h4>
 
     <form action="includes/login.php" method="post">
@@ -38,11 +48,16 @@
     </div>
     </form>   <!-- search-form -->
     <!-- /.input-group -->
+    <?php
+   }
+   ?>
+
 </div>
 
 
 <!-- Blog Categories Well -->
 <div class="well">
+
                   <?php 
                     $query = "SELECT * FROM categories";
                     $select_all_categories_query = mysqli_query($connection , $query);     

@@ -32,16 +32,17 @@ if (isset($_POST['checkboxarray'])) {
                     $post_category_id = $row['post_category_id'];
                     $post_title = $row['post_title'];
                     $post_author = $row['post_author'];
+                    $post_user = $row['post_user'];
+                    $post_status = $row['post_status'];
                     $post_date = $row['post_date'];
                     $post_image = $row['post_image'];
                     $post_content = $row['post_content'];
                     $post_tags = $row['post_tags'];
-
                     $post_status = $row['post_status'];
                 }
 
 
-                $query = "INSERT INTO posts( post_category_id , post_title , post_author , post_date , post_image , post_content , post_tags ,  post_status) VALUES( '$post_category_id ', '$post_title' ,  '$post_author' , now(), '$post_image' , '$post_content' , '$post_tags' ,'$post_status')";
+                $query = "INSERT INTO posts( post_category_id , post_title , post_author , post_date , post_image , post_content , post_tags ,  post_status , post_user) VALUES( '$post_category_id ', '$post_title' ,  '$post_author' , now(), '$post_image' , '$post_content' , '$post_tags' ,'$post_status', '$post_user')";
                 $add_post_query = mysqli_query($connection, $query);
                 insertPostError($add_post_query);
                 break;
@@ -51,6 +52,7 @@ if (isset($_POST['checkboxarray'])) {
                 break;
         }
     }
+   
 }
 ?>
 
