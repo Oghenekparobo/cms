@@ -32,10 +32,14 @@
 
 
 
-            $query = "SELECT * FROM posts ";
+            $query = "SELECT * FROM posts WHERE post_status = 'published' ";
             $find_count = mysqli_query($connection, $query);
             $count = mysqli_num_rows($find_count);
             $count = ceil($count / $per_page);
+
+            if($count < 1){ 
+                echo '<h1 class="text-center">eyah no post<h1/>';
+            }
 
 
 

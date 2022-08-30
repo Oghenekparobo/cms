@@ -29,9 +29,19 @@
 
                 }
 
+                if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin' ){ 
+                    $query = "SELECT * FROM posts WHERE post_id = $p_id";
+                }else{ 
+                    $query = "SELECT * FROM posts WHERE post_id = $p_id AND post_status = 'published'";
+                }
 
-                $query = "SELECT * FROM posts WHERE post_id = $p_id";
+              
                 $select_all_posts_query = mysqli_query($connection, $query);
+                $count = mysqli_num_rows($select_all_posts_query);
+
+                if($count < 1){ 
+                    echo '<h1 class="text-center">no post available<h1/>';
+                }
 
                 while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
                     $post_id = $row['post_id'];

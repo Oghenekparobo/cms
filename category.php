@@ -18,14 +18,20 @@
         <div class="col-md-8">
            
          <?php
- $get_id = $_GET['category'];
+        $get_id = $_GET['category'];
          if(isset($_GET['category'])){ 
             $get_id = $_GET['category'];
          }
 
       
-    $query = "SELECT * FROM posts WHERE post_category_id ='$get_id'";
+    $query = "SELECT * FROM posts WHERE post_category_id ='$get_id' AND post_status = 'published'";
     $select_all_posts_query = mysqli_query($connection,$query);
+
+    $count = mysqli_num_rows($select_all_posts_query);
+
+    if($count < 1){ 
+        echo '<h1 class="text-center">eyah no category<h1/>';
+    }
 
     while($row = mysqli_fetch_assoc($select_all_posts_query)) {
     $post_title = $row['post_title'];
